@@ -46,6 +46,7 @@ public class WeixinMsgController extends MsgControllerAdapter {
 	static Log logger = Log.getLog(WeixinMsgController.class);
 	private static final String helpStr = "\t你的品位不错哦  么么哒。";
 
+	@Override
 	protected void processInTextMsg(InTextMsg inTextMsg){
 		String msgContent = inTextMsg.getContent().trim();
 		// 帮助提示
@@ -147,13 +148,11 @@ public class WeixinMsgController extends MsgControllerAdapter {
 			renderOutTextMsg("你发的内容为："+msgContent);
 			
 			
-		}
-		
-		else {
-			renderOutTextMsg("你发的内容为："+msgContent);
+		} else {
+			//renderOutTextMsg("你发的内容为："+msgContent);
 			//转发给多客服PC客户端
-//			OutCustomMsg outCustomMsg = new OutCustomMsg(inTextMsg);
-//			render(outCustomMsg);
+			OutCustomMsg outCustomMsg = new OutCustomMsg(inTextMsg);
+			render(outCustomMsg);
 		}
 		
 	}
@@ -218,6 +217,7 @@ public class WeixinMsgController extends MsgControllerAdapter {
 		renderNull();
 	}
 
+	@Override
 	protected void processInImageMsg(InImageMsg inImageMsg)
 	{
 		//转发给多客服PC客户端
@@ -231,6 +231,7 @@ public class WeixinMsgController extends MsgControllerAdapter {
 	/**
 	 * 实现父类抽方法，处理关注/取消关注消息
 	 */
+	@Override
 	protected void processInFollowEvent(InFollowEvent inFollowEvent)
 	{
 		if (InFollowEvent.EVENT_INFOLLOW_SUBSCRIBE.equals(inFollowEvent.getEvent()))
@@ -285,6 +286,7 @@ public class WeixinMsgController extends MsgControllerAdapter {
 	/**
 	 * 实现父类抽方法，处理自定义菜单事件
 	 */
+	@Override
 	protected void processInMenuEvent(InMenuEvent inMenuEvent)
 	{
 		logger.debug("菜单事件：" + inMenuEvent.getFromUserName());

@@ -17,10 +17,11 @@ public class WeixinApiController extends ApiController {
 	 */
 	public void getMenu() {
 		ApiResult apiResult = MenuApi.getMenu();
-		if (apiResult.isSucceed())
+		if (apiResult.isSucceed()) {
 			renderText(apiResult.getJson());
-		else
+		} else {
 			renderText(apiResult.getErrorMsg());
+		}
 	}
 
 	/**
